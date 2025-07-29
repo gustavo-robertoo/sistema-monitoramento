@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sistema de Monitoramento de Saúde</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>Monitoramento de Saúde para Idosos</h1>
+    <p>Em tempo real</p>
+  </header>
+
+  <div class="container">
+    <div class="topo">
+      <div class="card queda">
+        <h2>Detecção de Queda</h2>
+        <p id="queda-status">Nenhuma queda detectada</p>
+      </div>
+
+      <div class="card batimentos">
+        <h2>Batimentos Cardíacos</h2>
+        <p class="valor" id="bpm">80 bpm</p>
+        <p class="status" id="status-bpm">Normal</p>
+      </div>
+    </div>
+
+    <div class="card status-geral">
+      <h2>Status Geral</h2>
+      <p id="status-geral">Estável</p>
+      <div class="grafico-simulado">
+  <div class="grupo-barra">
+    <div class="barra" id="barra1"></div>
+    <p class="legenda">Frequência Cardíaca</p>
+  </div>
+  <div class="grupo-barra">
+    <div class="barra" id="barra2"></div>
+    <p class="legenda">Movimento Corporal</p>
+  </div>
+  <div class="grupo-barra">
+    <div class="barra" id="barra3"></div>
+    <p class="legenda">Risco de Queda</p>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 - Sistema de Monitoramento de Saúde</p>
+  </footer>
+
+  <script>
+    setInterval(() => {
+      const bpm = Math.floor(Math.random() * (120 - 60) + 60);
+      document.getElementById("bpm").textContent = `${bpm} bpm`;
+      document.getElementById("status-bpm").textContent = bpm > 100 ? "Alerta: Alta frequência" : "Normal";
+      document.getElementById("status-bpm").style.color = bpm > 100 ? "red" : "green";
+
+      const queda = Math.random() < 0.1;
+      document.getElementById("queda-status").textContent = queda ? "🚨 Queda detectada!" : "Nenhuma queda detectada";
+
+      document.getElementById("status-geral").textContent = queda || bpm > 110 ? "⚠️ Atenção necessária" : "Estável";
+
+      // Simula gráfico
+      document.getElementById("barra1").style.height = `${bpm}px`;
+      document.getElementById("barra2").style.height = `${Math.random() * 120}px`;
+      document.getElementById("barra3").style.height = queda ? `120px` : `${Math.random() * 80 + 20}px`;
+    }, 3000);
+  </script>
+</body>
+</html>
